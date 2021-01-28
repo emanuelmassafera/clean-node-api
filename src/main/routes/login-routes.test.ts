@@ -52,19 +52,13 @@ describe('Login Routes', () => {
     })
 
     test('Should return 401 on login', async () => {
-      const password = await hash('any_password', 12)
-      await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password
-      })
       await request(app)
         .post('/api/login')
         .send({
           email: 'any_email@mail.com',
           password: 'any_password'
         })
-        .expect(200)
+        .expect(401)
     })
   })
 })
