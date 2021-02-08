@@ -32,6 +32,7 @@ const makeLoadSurveysRepository = (): LoadSurveysRepository => {
   }
   return new LoadSurveysRepositoryStub()
 }
+
 type SutTypes = {
   sut: DbLoadSurveys
   loadSurveysRepositoryStub: LoadSurveysRepository
