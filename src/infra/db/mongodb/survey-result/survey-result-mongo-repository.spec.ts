@@ -1,5 +1,5 @@
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
-import { MongoHelper } from '../../helpers/mongo-helper'
+import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyModel } from '@/domain/models/survey'
 import { AccountModel } from '@/domain/models/account'
 import { Collection } from 'mongodb'

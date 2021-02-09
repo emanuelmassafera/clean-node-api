@@ -3,7 +3,7 @@ import { AddSurveyRepository } from '@/data/protocols/db/survey/add-survey-repos
 import { LoadSurveysRepository } from '@/data/protocols/db/survey/load-surveys-repository'
 import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository'
 import { SurveyModel } from '@/domain/models/survey'
-import { AddSurveyModel } from '@/domain/usecases/add-survey'
+import { AddSurveyModel } from '@/domain/usecases/survey/add-survey'
 
 export class SurveyMongoRepository implements
 AddSurveyRepository,
