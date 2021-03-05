@@ -40,7 +40,7 @@ describe('Login Controller', () => {
 
   test('Should return 401 if invalid credentials are provided', async () => {
     const { sut, authenticationSpy } = makeSut()
-    authenticationSpy.token = null
+    authenticationSpy.authenticationModel = null
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(unauthorized())
   })
@@ -50,12 +50,6 @@ describe('Login Controller', () => {
     jest.spyOn(authenticationSpy, 'auth').mockImplementationOnce(throwError)
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
-  })
-
-  test('Should return 200 if valid credentials are provided', async () => {
-    const { sut, authenticationSpy } = makeSut()
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(ok({ accessToken: authenticationSpy.token }))
   })
 
   test('Should call Validation with correct value', async () => {
@@ -70,5 +64,11 @@ describe('Login Controller', () => {
     validationSpy.error = new MissingParamError(faker.random.word())
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(badRequest(validationSpy.error))
+  })
+
+  test('Should return 200 if valid credentials are provided', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(authenticationSpy.authenticationModel))
   })
 })
