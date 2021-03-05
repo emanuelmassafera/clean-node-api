@@ -11,9 +11,9 @@ AddAccountRepository,
 LoadAccountByEmailRepository,
 UpdateAccessTokenRepository,
 LoadAccountByTokenRepository {
-  async add (accountData: AddAccountParams): Promise<AccountModel> {
+  async add (data: AddAccountParams): Promise<AccountModel> {
     const accountCollection = await MongoHelper.getCollection('accounts')
-    const result = await accountCollection.insertOne(accountData)
+    const result = await accountCollection.insertOne(data)
     return MongoHelper.map(result.ops[0])
   }
 
