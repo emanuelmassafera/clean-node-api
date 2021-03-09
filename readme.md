@@ -1,8 +1,4 @@
-[![Build Status](https://travis-ci.org/emanuelmassafera/clean-node-api.svg?branch=master)](https://travis-ci.org/emanuelmassafera/clean-node-api)
-
-[![Node.js CI](https://github.com/emanuelmassafera/clean-node-api/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/emanuelmassafera/clean-node-api/actions/workflows/nodejs-ci.yml)
-
-[![Coverage Status](https://coveralls.io/repos/github/emanuelmassafera/clean-node-api/badge.svg?branch=master)](https://coveralls.io/github/emanuelmassafera/clean-node-api?branch=master)
+[![Build Status](https://travis-ci.org/emanuelmassafera/clean-node-api.svg?branch=master)](https://travis-ci.org/emanuelmassafera/clean-node-api) [![Node.js CI](https://github.com/emanuelmassafera/clean-node-api/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/emanuelmassafera/clean-node-api/actions/workflows/nodejs-ci.yml) [![Coverage Status](https://coveralls.io/repos/github/emanuelmassafera/clean-node-api/badge.svg?branch=master)](https://coveralls.io/github/emanuelmassafera/clean-node-api?branch=master)
 
 # **Clean Node API**
 
