@@ -4,7 +4,6 @@ import { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/lo
 import { SurveyResultModel } from '@/domain/models/survey-result'
 import { SaveSurveyResultParams } from '@/domain/usecases/survey-result/save-survey-result'
 import { ObjectId } from 'mongodb'
-
 export class SurveyResultMongoRepository implements SaveSurveyResultRepository, LoadSurveyResultRepository {
   async save (data: SaveSurveyResultParams): Promise<void> {
     const surveyResultCollection = await MongoHelper.getCollection('surveyResults')
@@ -99,10 +98,12 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository, 
                     else: 0
                   }
                 },
-                isCurrentAccountAnswer: {
-                  $eq: ['$$item.answer', {
-                    $arrayElemAt: ['$currentAccountAnswer', 0]
-                  }]
+                isCurrentAccountAnswerCount: {
+                  $cond: [{
+                    $eq: ['$$item.answer', {
+                      $arrayElemAt: ['$currentAccountAnswer', 0]
+                    }]
+                  }, 1, 0]
                 }
               }]
             }
@@ -143,14 +144,16 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository, 
           question: '$question',
           date: '$date',
           answer: '$answers.answer',
-          image: '$answers.image',
-          isCurrentAccountAnswer: '$answers.isCurrentAccountAnswer'
+          image: '$answers.image'
         },
         count: {
           $sum: '$answers.count'
         },
         percent: {
           $sum: '$answers.percent'
+        },
+        isCurrentAccountAnswerCount: {
+          $sum: '$answers.isCurrentAccountAnswerCount'
         }
       })
       .project({
@@ -167,7 +170,9 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository, 
           percent: {
             $round: ['$percent']
           },
-          isCurrentAccountAnswer: '$_id.isCurrentAccountAnswer'
+          isCurrentAccountAnswer: {
+            $eq: ['$isCurrentAccountAnswerCount', 1]
+          }
         }
       })
       .sort({
