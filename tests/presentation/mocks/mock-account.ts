@@ -1,6 +1,6 @@
 import { AddAccount, AddAccountParams, Authentication, AuthenticationParams, LoadAccountByToken } from '@/domain/usecases'
 import { AccountModel, AuthenticationModel } from '@/domain/models'
-import { mockAccountModel } from '@/../tests/domain/mocks'
+import { mockAccountModel } from '@/tests/domain/mocks'
 
 import faker from 'faker'
 
