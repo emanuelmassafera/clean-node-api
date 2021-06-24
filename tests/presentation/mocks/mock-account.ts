@@ -3,11 +3,11 @@ import { AddAccount, Authentication, LoadAccountByToken } from '@/domain/usecase
 import faker from 'faker'
 
 export class AddAccountSpy implements AddAccount {
+  params: AddAccount.Params
   result = true
-  addAccountParams: AddAccount.Params
 
   async add (params: AddAccount.Params): Promise<AddAccount.Result> {
-    this.addAccountParams = params
+    this.params = params
     return await Promise.resolve(this.result)
   }
 }
@@ -26,9 +26,9 @@ export class AuthenticationSpy implements Authentication {
 }
 
 export class LoadAccountByTokenSpy implements LoadAccountByToken {
-  result = { id: faker.random.uuid() }
   accessToken: string
   role: string
+  result = { id: faker.random.uuid() }
 
   async load (accessToken: string, role?: string): Promise<LoadAccountByToken.Result> {
     this.accessToken = accessToken

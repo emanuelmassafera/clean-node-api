@@ -25,9 +25,9 @@ const makeSut = (): SutTypes => {
 describe('DbAddAccount Usecase', () => {
   test('Should call Hasher with correct plaintext', async () => {
     const { sut, hasherSpy } = makeSut()
-    const addAccountParams = mockAddAccountParams()
-    await sut.add(addAccountParams)
-    expect(hasherSpy.plaintext).toBe(addAccountParams.password)
+    const params = mockAddAccountParams()
+    await sut.add(params)
+    expect(hasherSpy.plaintext).toBe(params.password)
   })
 
   test('Should throw if Hasher throws', async () => {
@@ -39,11 +39,11 @@ describe('DbAddAccount Usecase', () => {
 
   test('Should call AddAccountRepository with correct values', async () => {
     const { sut, addAccountRepositorySpy, hasherSpy } = makeSut()
-    const addAccountParams = mockAddAccountParams()
-    await sut.add(addAccountParams)
+    const params = mockAddAccountParams()
+    await sut.add(params)
     expect(addAccountRepositorySpy.params).toEqual({
-      name: addAccountParams.name,
-      email: addAccountParams.email,
+      name: params.name,
+      email: params.email,
       password: hasherSpy.digest
     })
   })
@@ -64,9 +64,9 @@ describe('DbAddAccount Usecase', () => {
 
   test('Should call CheckAccountByEmailRepository with correct email', async () => {
     const { sut, checkAccountByEmailRepositorySpy } = makeSut()
-    const addAccountParams = mockAddAccountParams()
-    await sut.add(addAccountParams)
-    expect(checkAccountByEmailRepositorySpy.email).toBe(addAccountParams.email)
+    const params = mockAddAccountParams()
+    await sut.add(params)
+    expect(checkAccountByEmailRepositorySpy.email).toBe(params.email)
   })
 
   test('Should return true if CheckAccountByEmailRepository returns false', async () => {

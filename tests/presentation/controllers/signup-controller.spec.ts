@@ -48,7 +48,7 @@ describe('SignUp Controller', () => {
     const { sut, addAccountSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
-    expect(addAccountSpy.addAccountParams).toEqual({
+    expect(addAccountSpy.params).toEqual({
       name: request.name,
       email: request.email,
       password: request.password
